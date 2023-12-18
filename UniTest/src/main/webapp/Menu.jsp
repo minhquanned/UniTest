@@ -32,9 +32,10 @@
 							</span>
 							<h3 class="mb-4 pb-2 text-center">Menu</h3>
 							<div class="d-flex justify-content-around">
-								<button class="btn btn-primary btn-lg" type="button">Doctor</button>
-								<button class="btn btn-primary btn-lg" type="button">Patient</button>
-								<button class="btn btn-primary btn-lg" type="button">Medicine</button>
+								<button class="btn btn-primary btn-lg" type="button">Doctors</button>
+								<button class="btn btn-primary btn-lg" type="button">Patients</button>
+								<button class="btn btn-primary btn-lg" type="button"
+									onclick="location.href='/UniTest/MedicineServlet'">Medicine</button>
 							</div>
 
 						</div>
