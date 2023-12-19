@@ -19,4 +19,24 @@
     <servlet-name>MedicineServlet</servlet-name>
     <url-pattern>/MedicineServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoctorServlet</display-name>
+    <servlet-name>DoctorServlet</servlet-name>
+    <servlet-class>com.java.be.DoctorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoctorServlet</servlet-name>
+    <url-pattern>/DoctorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PatientServlet</display-name>
+    <servlet-name>PatientServlet</servlet-name>
+    <servlet-class>com.java.be.PatientServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PatientServlet</servlet-name>
+    <url-pattern>/PatientServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

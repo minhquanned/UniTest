@@ -33,38 +33,29 @@
 									onclick="location.href='/UniTest'">
 									<i class="fa-solid fa-chevron-left"></i>
 								</button>
-								Medicines List
+								Doctors List
 							</h3>
-
-							<div class="mt-4 pt-2">
-								<button type="button"
-									class="btn btn-primary btn-rounded btn-sm my-0"
-									onclick="location.href='SubjectRegistration.jsp'">
-									<i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add
-								</button>
-							</div>
-							<br>
 
 							<form class="d-flex justify-content-md-around">
 
 								<table class="table ccard-table table-striped table-hover">
 									<tr>
-										<th>Medicine ID</th>
-										<th>Medicine Name</th>
-										<th>Function</th>
+										<th>Doctor ID</th>
+										<th>Doctor's name</th>
+										<th>Phone number</th>
 										<th class="text-center" colspan="3"></th>
 									</tr>
 
-									<c:forEach var="item" items="${ListMedicines}">
+									<c:forEach var="item" items="${ListDoctors}">
 
 										<tr>
-											<td>${item.getMedicineID()}</td>
-											<td>${item.getMedicineName()}</td>
-											<td>${item.getMedicineFunction()}</td>
+											<td>${item.getDoctorID()}</td>
+											<td>${item.getDoctorName()}</td>
+											<td>${item.getPhoneNumber()}</td>
 											<td><span class="table-remove edit">
 													<button type="button"
 														class="btn btn-primary btn-rounded btn-sm my-0"
-														onclick="moreInfo('${item.getMedicineID()}','${item.getMedicineName()}','${item.getMedicineFunction()}', '${item.getUnit()}', '${item.getDoseMin()}', '${item.getDoseMax()}')">More
+														onclick="moreInfo('${item.getDoctorID()}','${item.getDoctorName()}','${item.getPhoneNumber()}')">More
 														Info</button>
 											</span></td>
 										</tr>
@@ -72,13 +63,10 @@
 									</c:forEach>
 
 									<script type="text/javascript">
-										function moreInfo(medicineID, medicineName, medicineFunction, unit, doseMin, doseMax) {
-											alert("Medicine ID: " + medicineID
-													+ "\nName: " + medicineName
-													+ "\nFunction: " + medicineFunction
-													+ "\nUnit: " + unit
-													+ "\nMinimum dose: " + doseMin
-													+ "\nMaximim dose: " + doseMax);
+										function moreInfo(doctorID, doctorName, phoneNumber) {
+											alert("Doctor ID: " + doctorID
+													+ "\nName: " + doctorName
+													+ "\nPhone Number: " + phoneNumber);
 										}
 									</script>
 

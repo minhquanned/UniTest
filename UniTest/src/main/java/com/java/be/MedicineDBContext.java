@@ -28,13 +28,13 @@ public class MedicineDBContext {
 	// Test
 	public static void main(String[] args) throws ClassNotFoundException {
 		MedicineDBContext bConnect = new MedicineDBContext();
-//		Medicine bSubject = new Medicine("M04", "Never Depression", "Treat Depression", "pill", 4, 6);
+//		Medicine bmedicine = new Medicine("M04", "Never Depression", "Treat Depression", "pill", 4, 6);
 		List<Medicine> medicines = bConnect.getAllMedicines();
 		System.out.println(medicines);
-//		bConnect.updateMedicine(bSubject);
+//		bConnect.updateMedicine(bmedicine);
 	}
 
-	// Take all Subject
+	// Take all medicine
 	public List<Medicine> getAllMedicines() throws ClassNotFoundException {
 		List<Medicine> medicines = new ArrayList<>();
 
@@ -70,8 +70,8 @@ public class MedicineDBContext {
 			ResultSet rs = stm.executeQuery("SELECT * FROM [MEDICINE] WHERE medicineID = '" + id + "'");
 
 			while (rs.next()) {
-				String medicineID = rs.getString("subjectID");
-				String medicineName = rs.getString("subjectName");
+				String medicineID = rs.getString("medicineID");
+				String medicineName = rs.getString("medicineName");
 				String medicineFunction = rs.getString("noC");
 				String unit = rs.getString("unit");
 				float doseMin = rs.getFloat("doseMin");
@@ -87,7 +87,7 @@ public class MedicineDBContext {
 		return null;
 	}
 
-	// Add Subject
+	// Add medicine
 	public void addMedicine(String medicineID, String medicineName, String medicineFunction, String unit, float doseMin,
 			float doseMax) throws ClassNotFoundException {
 		try {
@@ -109,8 +109,8 @@ public class MedicineDBContext {
 		}
 	}
 
-	// Update Subject
-	public void updateSubject(Medicine medicine) {
+	// Update medicine
+	public void updateMedicine(Medicine medicine) {
 		try {
 			c = dbConnect.initializeDatabase();
 			PreparedStatement pstm = c
@@ -133,7 +133,7 @@ public class MedicineDBContext {
 		}
 	}
 
-	// Delete Subject
+	// Delete medicine
 	public void deleteMedicine(String medicineID) {
 		try {
 			c = dbConnect.initializeDatabase();

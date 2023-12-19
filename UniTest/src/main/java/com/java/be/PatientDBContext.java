@@ -8,12 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorDBContext {
+public class PatientDBContext {
 
 	Connection c;
 
 	// Test connection
-	public DoctorDBContext() {
+	public PatientDBContext() {
 		try {
 			c = dbConnect.initializeDatabase();
 		} catch (ClassNotFoundException e) {
@@ -27,51 +27,55 @@ public class DoctorDBContext {
 
 	// Test
 	public static void main(String[] args) throws ClassNotFoundException {
-		DoctorDBContext bConnect = new DoctorDBContext();
+		PatientDBContext bConnect = new PatientDBContext();
 //		Medicine bSubject = new Medicine("M04", "Never Depression", "Treat Depression", "pill", 4, 6);
-		List<Doctor> doctors = bConnect.getAllDoctors();
-		System.out.println(doctors);
+		List<Patient> patients = bConnect.getAllPatients();
+		System.out.println(patients);
 //		bConnect.updateMedicine(bSubject);
 	}
 
 	// Take all Subject
-	public List<Doctor> getAllDoctors() throws ClassNotFoundException {
-		List<Doctor> doctors = new ArrayList<>();
+	public List<Patient> getAllPatients() throws ClassNotFoundException {
+		List<Patient> patients = new ArrayList<>();
 
 		try {
 			c = dbConnect.initializeDatabase();
 			Statement stm = c.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT * FROM [DOCTOR]");
+			ResultSet rs = stm.executeQuery("SELECT * FROM [PATIENT]");
 
 			while (rs.next()) {
-				String doctorID = rs.getString("doctorID");
-				String doctorName = rs.getString("doctorName");
+				String patientID = rs.getString("patientID");
+				String patientName = rs.getString("patientName");
+				String deseaseName = rs.getString("deseaseName");
 				String phoneNumber = rs.getString("phoneNumber");
+				String address = rs.getString("address");
 
-				Doctor doctor = new Doctor(doctorID, doctorName, phoneNumber);
+				Patient patient = new Patient(patientID, patientName, deseaseName, phoneNumber, address);
 
-				doctors.add(doctor);
+				patients.add(patient);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return doctors;
+		return patients;
 	}
 
-	public Doctor getDoctorbyID(String id) throws ClassNotFoundException {
+	public Patient getPatientbyID(String id) throws ClassNotFoundException {
 		try {
 			c = dbConnect.initializeDatabase();
 			Statement stm = c.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT * FROM [DOCTOR] WHERE doctorID = '" + id + "'");
+			ResultSet rs = stm.executeQuery("SELECT * FROM [PATIENT] WHERE patientID = '" + id + "'");
 
 			while (rs.next()) {
-				String doctorID = rs.getString("doctorID");
-				String doctorName = rs.getString("doctorName");
+				String patientID = rs.getString("patientID");
+				String patientName = rs.getString("patientName");
+				String deseaseName = rs.getString("deseaseName");
 				String phoneNumber = rs.getString("phoneNumber");
+				String address = rs.getString("address");
 
-				return new Doctor(doctorID, doctorName, phoneNumber);
+				return new Patient(patientID, patientName, deseaseName, phoneNumber, address);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -82,13 +86,13 @@ public class DoctorDBContext {
 	}
 
 	// Add Subject
-	public void addDoctor(String doctorID, String doctorName, String phoneNumber) throws ClassNotFoundException {
+	public void addPatient(String patientID, String patientName, String phoneNumber) throws ClassNotFoundException {
 		try {
 			c = dbConnect.initializeDatabase();
 			PreparedStatement pstm = c.prepareStatement(
-					"INSERT INTO [DOCTOR] (doctorID, doctorName, phoneNumber) values (?, ?, ?)");
-			pstm.setString(1, doctorID);
-			pstm.setString(2, doctorName);
+					"INSERT INTO [PATIENT] (patientID, patientName, deseaseName, phoneNumber, address) values (?, ?, ?, ?, ?)");
+			pstm.setString(1, patientID);
+			pstm.setString(2, patientName);
 			pstm.setString(3, phoneNumber);
 
 			pstm.executeUpdate();
@@ -100,14 +104,16 @@ public class DoctorDBContext {
 	}
 
 	// Update Subject
-	public void updateDoctor(Doctor doctor) {
+	public void updatePatient(Patient patient) {
 		try {
 			c = dbConnect.initializeDatabase();
 			PreparedStatement pstm = c.prepareStatement(
-					"UPDATE [DOCTOR] SET doctorName = ?, phoneNumber = ? WHERE doctorID = ?");
-			pstm.setString(1, doctor.getDoctorID());
-			pstm.setString(2, doctor.getDoctorName());
-			pstm.setString(3, doctor.getPhoneNumber());
+					"UPDATE [PATIENT] SET patientName = ?, deseaseName = ?, phoneNumber = ?, address = ? WHERE patientID = ?");
+			pstm.setString(1, patient.getPatientID());
+			pstm.setString(2, patient.getPatientName());
+			pstm.setString(3, patient.getDeseaseName());
+			pstm.setString(4, patient.getPhoneNumber());
+			pstm.setString(5, patient.getAddress());
 
 			pstm.executeUpdate();
 			System.out.println("update success!");
@@ -121,11 +127,11 @@ public class DoctorDBContext {
 	}
 
 	// Delete Subject
-	public void deleteDoctor(String doctorID) {
+	public void deletePatient(String patientID) {
 		try {
 			c = dbConnect.initializeDatabase();
-			PreparedStatement pstm = c.prepareStatement("DELETE FROM [DOCTOR] WHERE doctorID = ?");
-			pstm.setString(1, doctorID);
+			PreparedStatement pstm = c.prepareStatement("DELETE FROM [PATIENT] WHERE patientID = ?");
+			pstm.setString(1, patientID);
 
 			pstm.executeUpdate();
 			System.out.println("delete success!");

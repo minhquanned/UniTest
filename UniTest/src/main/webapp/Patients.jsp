@@ -33,9 +33,9 @@
 									onclick="location.href='/UniTest'">
 									<i class="fa-solid fa-chevron-left"></i>
 								</button>
-								Medicines List
+								Patients List
 							</h3>
-
+							
 							<div class="mt-4 pt-2">
 								<button type="button"
 									class="btn btn-primary btn-rounded btn-sm my-0"
@@ -49,36 +49,45 @@
 
 								<table class="table ccard-table table-striped table-hover">
 									<tr>
-										<th>Medicine ID</th>
-										<th>Medicine Name</th>
-										<th>Function</th>
+										<th>Patient ID</th>
+										<th>Name</th>
+										<th>Desease</th>
+										<th>Phone number</th>
+										<th>Address</th>
 										<th class="text-center" colspan="3"></th>
 									</tr>
 
-									<c:forEach var="item" items="${ListMedicines}">
+									<c:forEach var="item" items="${ListPatients}">
 
 										<tr>
-											<td>${item.getMedicineID()}</td>
-											<td>${item.getMedicineName()}</td>
-											<td>${item.getMedicineFunction()}</td>
+											<td>${item.getPatientID()}</td>
+											<td>${item.getPatientName()}</td>
+											<td>${item.getDeseaseName()}</td>
+											<td>${item.getPhoneNumber()}</td>
+											<td>${item.getAddress()}</td>
 											<td><span class="table-remove edit">
 													<button type="button"
 														class="btn btn-primary btn-rounded btn-sm my-0"
-														onclick="moreInfo('${item.getMedicineID()}','${item.getMedicineName()}','${item.getMedicineFunction()}', '${item.getUnit()}', '${item.getDoseMin()}', '${item.getDoseMax()}')">More
+														onclick="moreInfo('${item.getPatientID()}','${item.getPatientName()}','${item.getDeseaseName()}','${item.getPhoneNumber()}'${item.getAddress()}',')">More
 														Info</button>
+											</span></td>
+											<td><span>
+													<button type="button"
+														class="btn btn-primary btn-rounded btn-sm my-0"
+														onclick="location.href='/LTW_final/EditSubject?subjectID=${item.getMedicineID()}'">
+														Prescription</button>
 											</span></td>
 										</tr>
 
 									</c:forEach>
 
 									<script type="text/javascript">
-										function moreInfo(medicineID, medicineName, medicineFunction, unit, doseMin, doseMax) {
-											alert("Medicine ID: " + medicineID
-													+ "\nName: " + medicineName
-													+ "\nFunction: " + medicineFunction
-													+ "\nUnit: " + unit
-													+ "\nMinimum dose: " + doseMin
-													+ "\nMaximim dose: " + doseMax);
+										function moreInfo(patientID, patientName, deseaseName, phoneNumber, address) {
+											alert("Patient ID: " + patientID
+													+ "\nName: " + patientName
+													+ "\nDesease: " + deseaseName
+													+ "\nPhone Number: " + phoneNumber
+													+ "\nAddress: " + address);
 										}
 									</script>
 
